@@ -9,10 +9,20 @@ function parseArmaModpackPreset()
 			parser = new DOMParser()
 			parsed = parser.parseFromString(fileContent, "text/html")
 			modlist = parsed.getElementsByClassName("mod-list")[0].querySelector("table > tbody")
-			dlclist = parsed.getElementsByClassName("dlc-list")[0].querySelector("table > tbody")
+			dlclist = parsed.getElementsByClassName("dlc-list")
+			
 			
 			supportSpaceAndDash = document.getElementById("supportSpaceAndDash").checked
 			needDLCInString = document.getElementById("needDLCInString").checked
+			
+			if(dlclist.length == 0)
+			{
+				needDLCInString = false
+			}
+			else
+			{
+				dlclist = dlclist[0].querySelector("table > tbody")
+			}
 			if (supportSpaceAndDash)
 			{
 				regex = new RegExp("[^a-zA-Z0-9\-\_\' ]", "g")
