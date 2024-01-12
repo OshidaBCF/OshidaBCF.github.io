@@ -60,7 +60,7 @@ function parseArmaModpackPreset()
 				modName = row.querySelector('[data-type="DisplayName"]').innerHTML
 				modName = modName.replace('&amp;', /&/).replace('&lt;', /</).replace('&gt;', />/).replace('&quot;', /'/).replace('&apos;', /"/)
 				modName = modName.replaceAll(regex, "")
-				output += modName + ";"
+				output += "@" + modName + ";"
 			}
 			output = output.replaceAll("  ", " ").slice(0, -1)
 			document.getElementById("modString").textContent = output
