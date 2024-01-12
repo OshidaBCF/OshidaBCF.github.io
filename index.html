@@ -18,11 +18,15 @@
 		<label for="armaModpackFile">Select a file:</label>
 		<input type="file" id="armaModpackFile" accept=".html">
 		<br><br>
+		<input type="checkbox" id="supportSpaceAndDash">Does your server use support spaces, - and _, check the download folder of your server to see if the mods folder contain spaces or not.</checkbox>
+		<br>
+		<input type="checkbox" id="needDLCInString">Does the string need to include the DLCs.</checkbox>
+		<br><br>
 		<button type="button" onclick="parseArmaModpackPreset()">Run Parser</button>
-		<input type="checkbox" id="supportSpaceAndDash">Does your server provider support Spaces and Dashes, check the download folder of your server to see if the mods folder contain spaces or not.</checkbox>
 		<br><br>
 		<label for="modString">Modpack String : </label>
-		<br>
-        <textarea id="modString" autocorrect="off" style="width: 800px; height: 200px;" readonly></textarea>
+		<button id="copyStringToClipboardBtn" onclick="copyStringToClipboard()">Copy String</button>
+		<br><br>
+        <textarea id="modString" autocorrect="off" style="width: 800px; height: 300px;" readonly></textarea>
 	</body>
 </html>
