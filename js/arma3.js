@@ -10,8 +10,17 @@ function parseArmaModpackPreset()
 			parsed = parser.parseFromString(fileContent, "text/html");
 			modlist = parsed.getElementsByClassName("mod-list")[0].querySelector("table > tbody")
 			
+			supportSpaceAndDash = document.getElementById("supportSpaceAndDash").checked
+			if (supportSpaceAndDash)
+			{
+				regex = new RegExp("[^a-zA-Z0-9\- ]", "g");
+			}
+			else
+			{
+				regex = new RegExp("[^a-zA-Z0-9]", "g");
+			}
+
 			output = ""
-			regex = new RegExp("[^a-zA-Z0-9]", "g");
 			for (var i = 0, row; row = modlist.rows[i]; i++) {
 				modName = row.querySelector('[data-type="DisplayName"]').innerHTML
 
