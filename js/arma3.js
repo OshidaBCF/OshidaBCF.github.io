@@ -84,9 +84,12 @@ function parseArmaModpackPreset()
 	}
 }
 
-function setCBCookie(cb)
-{
+function setCBCookie(cb) {
 	setCookie(cb.id, cb.checked)
+}
+
+function setTACookie(ta) {
+	setCookie(ta.id, ta.value.replaceAll("\n", ","))
 }
 
 function setCookie(cname, cvalue) {
@@ -95,7 +98,7 @@ function setCookie(cname, cvalue) {
 
 function getCookie(cname) {
 	let decodedCookie = decodeURIComponent(document.cookie)
-	let cookieList = decodedCookie.split(';')
+	let cookieList = decodedCookie.split('; ')
 	let returnValue = ""
 	cookieList.forEach(cookie => {
 		[cookieName, cookieValue] = cookie.split("=")
@@ -173,9 +176,13 @@ function copyTextToClipboard(text) {
 		}
 	)
 }
-  
+
 waitForElm("#armaModpackFile").then((elm) => {
 	uploadInput = elm
+})
+
+waitForElm("#ignoreList").then((elm) => {
+	elm.textContent = getCookie("ignoreList").replaceAll(",", "\n")
 })
 
 waitForElm("#supportSpaceAndDash").then((elm) => {

@@ -22,7 +22,7 @@
 		<br><br>
 		<label for="ignoreList">Mods IDs to be ignored, one per line : </label>
 		<br>
-        <textarea id="ignoreList" autocorrect="off" style="width: 500px; height: 130px;"></textarea>
+        <textarea id="ignoreList" autocorrect="off" style="width: 500px; height: 130px;" onchange="setTACookie(this)"></textarea>
 		<br><br>
 		<input type="checkbox" id="supportSpaceAndDash" onclick="setCBCookie(this)">Does your server use support spaces, - and _, check the download folder of your server to see if the mods folder contain spaces or not.</checkbox>
 		<br>
