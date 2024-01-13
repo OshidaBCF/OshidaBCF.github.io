@@ -69,11 +69,16 @@ function parseArmaModpackPreset()
 			}
 			for (var i = 0, row; row = modlist.rows[i]; i++) {
 				modName = row.querySelector('[data-type="DisplayName"]').innerHTML
-				modID = row.querySelector('td > a').innerHTML.split("=")[1]
 				modName = modName.replace('&amp;', /&/).replace('&lt;', /</).replace('&gt;', />/).replace('&quot;', /'/).replace('&apos;', /"/)
 				modName = modName.replaceAll(regex, "")
-				if (!ignoreIDList.includes(modID))
-				output += "@" + modName + ";"
+				if(row.querySelector('[class="from-steam"]'))
+				{
+					modID = row.querySelector('td > a').innerHTML.split("=")[1]
+					if (!ignoreIDList.includes(modID))
+						output += "@" + modName + ";"
+				}
+				else
+					output += "@" + modName + ";"
 			}
 			output = output.replaceAll("  ", " ").slice(0, -1)
 			document.getElementById("modString").textContent = output
