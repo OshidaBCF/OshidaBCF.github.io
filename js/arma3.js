@@ -9,8 +9,19 @@ function parseArmaModpackPreset()
 			parser = new DOMParser()
 			parsed = parser.parseFromString(fileContent, "text/html")
 			modlist = parsed.getElementsByClassName("mod-list")[0].querySelector("table > tbody")
+			ignorelist = document.getElementById("ignoreList").value.split('\n')
 			dlclist = parsed.getElementsByClassName("dlc-list")
-			
+			ignoreIDList = []
+			if (ignorelist != "")
+			{
+				console.log(ignorelist)
+				ignorelist.forEach(modID => 
+				{
+					console.log(modID)
+					ignoreIDList.push(modID)
+				});
+			}
+
 			
 			supportSpaceAndDash = document.getElementById("supportSpaceAndDash").checked
 			needDLCInString = document.getElementById("needDLCInString").checked
@@ -58,8 +69,10 @@ function parseArmaModpackPreset()
 			}
 			for (var i = 0, row; row = modlist.rows[i]; i++) {
 				modName = row.querySelector('[data-type="DisplayName"]').innerHTML
+				modID = row.querySelector('td > a').innerHTML.split("=")[1]
 				modName = modName.replace('&amp;', /&/).replace('&lt;', /</).replace('&gt;', />/).replace('&quot;', /'/).replace('&apos;', /"/)
 				modName = modName.replaceAll(regex, "")
+				if (!ignoreIDList.includes(modID))
 				output += "@" + modName + ";"
 			}
 			output = output.replaceAll("  ", " ").slice(0, -1)
