@@ -84,6 +84,30 @@ function parseArmaModpackPreset()
 	}
 }
 
+function setCBCookie(cb)
+{
+	setCookie(cb.id, cb.checked)
+}
+
+function setCookie(cname, cvalue) {
+	document.cookie = cname + "=" + cvalue
+}
+
+function getCookie(cname) {
+	let decodedCookie = decodeURIComponent(document.cookie)
+	let cookieList = decodedCookie.split(';')
+	let returnValue = ""
+	cookieList.forEach(cookie => {
+		[cookieName, cookieValue] = cookie.split("=")
+		if (cookieName == cname)
+		{
+			returnValue = cookieValue
+			return
+		}
+	});
+	return returnValue
+}
+
 function copyStringToClipboard()
 {
 	var copyText = document.getElementById("modString")
@@ -150,7 +174,14 @@ function copyTextToClipboard(text) {
 	)
 }
   
-waitForElm("body > button").then((elm) => {
-	uploadInput = document.getElementById("armaModpackFile")
+waitForElm("#armaModpackFile").then((elm) => {
+	uploadInput = elm
 })
 
+waitForElm("#supportSpaceAndDash").then((elm) => {
+	elm.checked = getCookie("supportSpaceAndDash") == "true"
+})
+
+waitForElm("#needDLCInString").then((elm) => {
+	elm.checked = getCookie("needDLCInString") == "true"
+})
