@@ -79,6 +79,7 @@ function parseArmaModpackPreset()
 
 				if(row.querySelector('[class="from-steam"]'))
 				{
+					console.log(modName + " added")
 					modID = row.querySelector('td > a').innerHTML.split("=")[1]
 					if (!ignoreIDList.includes(modID))
 						output += "@" + modName + ";"
