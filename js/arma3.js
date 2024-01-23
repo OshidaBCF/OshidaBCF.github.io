@@ -71,14 +71,18 @@ function parseArmaModpackPreset()
 				modName = row.querySelector('[data-type="DisplayName"]').innerHTML
 				modName = modName.replace('&amp;', /&/).replace('&lt;', /</).replace('&gt;', />/).replace('&quot;', /'/).replace('&apos;', /"/)
 				modName = modName.replaceAll(regex, "")
+
+				if(row.querySelector('[class="from-local"]'))
+				{
+					console.log(modName + " ignored")
+				}
+
 				if(row.querySelector('[class="from-steam"]'))
 				{
 					modID = row.querySelector('td > a').innerHTML.split("=")[1]
 					if (!ignoreIDList.includes(modID))
 						output += "@" + modName + ";"
 				}
-				else
-					output += "@" + modName + ";"
 			}
 			output = output.replaceAll("  ", " ").slice(0, -1)
 			document.getElementById("modString").textContent = output
