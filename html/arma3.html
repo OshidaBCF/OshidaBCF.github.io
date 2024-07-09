@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta property="og:url" content="https://oshidabcf.github.io/">
+		<meta property="og:title" content="Arma 3 Toolkit">
+		<meta property="og:description" content="Arma 3 Toolkit">
+		<meta property="og:type" content="website">
+		<meta name="og:image" itemprop="image" content="https://oshidabcf.github.io/bread.png">
+		<title>Arma 3 Toolkit</title>
+		<link rel="icon" type="image/x-icon" href="https://oshidabcf.github.io/favicon.ico">
+		<script src="../js/arma3.js" defer></script>
+	</head>
+	<body>
+		<h1>Arma 3 Toolkit</h1>
+		<p>Modpack string generator for servers commandline.</p>
+		<p>This tool generate the string needed by servers to run with mods "@mod1;@mod2".</p>
+		<p>The Mod Ignore List and checkbox states are saved in cookies, so to make it faster if your configuration happen to not be the default one.</p>
+		<p>The string will not contrain LOCALS mods, you'll need to add them manually with the folder name on your server's machine</p>
+		<br>
+		<label for="armaModpackFile">Select a file:</label>
+		<input type="file" id="armaModpackFile" accept=".html">
+		<br><br>
+		<label for="ignoreList">Mods IDs to be ignored, one per line : </label>
+		<br>
+        <textarea id="ignoreList" autocorrect="off" style="width: 500px; height: 130px;" onchange="setTACookie(this)"></textarea>
+		<br><br>
+		<input type="checkbox" id="supportSpaceAndDash" onclick="setCBCookie(this)">Does your server use support spaces, - and _, check the download folder of your server to see if the mods folder contain spaces or not.</checkbox>
+		<br>
+		<input type="checkbox" id="needDLCInString" onclick="setCBCookie(this)">Does the string need to include the DLCs.</checkbox>
+		<br><br>
+		<button type="button" onclick="parseArmaModpackPreset()">Run Parser</button>
+		<br><br>
+		<label for="modString">Modpack String : </label>
+		<button id="copyStringToClipboardBtn" onclick="copyStringToClipboard()">Copy String</button>
+		<br>
+        <textarea id="modString" autocorrect="off" style="width: 800px; height: 300px;" readonly></textarea>
+	</body>
+</html>
